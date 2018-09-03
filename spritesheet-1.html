@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Classe Spritesheet</title>
+	<script src="spritesheet.js"></script>
+	<script src="animacao.js"></script>
+	<script src="teclado.js"></script>
+	<script src="sonic.js"></script>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script>
+		const ctx = document.querySelector("#canvas").getContext("2d");
+		const teclado = new Teclado();
+		const animation = new Animacao(ctx);
+
+		const imgSonic = new Image();
+		imgSonic.src = 'img/spritesheet.png';
+
+		const sonic = new Sonic(ctx, teclado, imgSonic);
+		sonic.y = 200;
+		animation.newSprite(sonic);
+
+		imgSonic.onload = () => animation.start();
+	</script>
+</body>
+</html>
