@@ -7,6 +7,7 @@ class Animacao {
 
 	newSprite(sprite){
 		this.sprites.push(sprite);
+		sprite.animation= this;
 	}
 
 	start(){

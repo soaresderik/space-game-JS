@@ -1,5 +1,7 @@
 const SETA_ESQUERDA = 37;
+const SETA_ACIMA = 38;
 const SETA_DIREITA = 39;
+const SETA_ABAIXO = 40;
 const ESPACO = 32;
 
 class Teclado {
@@ -39,8 +41,16 @@ class Teclado {
 		return SETA_ESQUERDA;
 	}
 
+	get SETA_ACIMA(){
+		return SETA_ACIMA;
+	}
+
 	get SETA_DIREITA(){
 		return SETA_DIREITA;
+	}
+
+	get SETA_ABAIXO(){
+		return SETA_ABAIXO;
 	}
 
 	get ESPACO(){
