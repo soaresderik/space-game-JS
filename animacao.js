@@ -3,6 +3,7 @@ class Animacao {
 		this.sprites = [];
 		this.isOn = false;
 		this.ctx = ctx;
+		this.process = [];
 	}
 
 	newSprite(sprite){
@@ -22,14 +23,22 @@ class Animacao {
 	nextFrame(){
 		if(!this.isOn) return;
 
-		this.clearScreen();
+		// this.clearScreen();
 
 		for(var i in this.sprites){
 			this.sprites[i].update();
 			this.sprites[i].draw();
 		}
 
-		requestAnimationFrame(() => { this.nextFrame() })
+		for(var i in this.process)
+			this.process[i].process();
+
+		requestAnimationFrame(() => this.nextFrame() )
+	}
+
+	newProcess(process){
+		this.process.push(process);
+		process.animation = this;
 	}
 
 

@@ -11,6 +11,7 @@ class Nave {
 	shot(){
 		const t = new Tiro(this.ctx, this);
 		this.animation.newSprite(t);
+		this.colisor.newSprite(t);
 	}
 
 	update(){
@@ -31,5 +32,28 @@ class Nave {
 
 	draw(){
 		this.ctx.drawImage(this.img, this.x, this.y, this.img.width, this.img.height);
+	}
+
+	squadCollision(){
+		let rets = [
+			{x: this.x+2, y:this.y+19, width: 9, height: 13 },
+			{x: this.x+13, y:this.y+3, width: 10, height: 33 },
+			{x: this.x+25, y:this.y+19, width: 9, height: 13 }
+		];
+
+		let { ctx } = this;
+
+		for(let i in rets){
+			ctx.save();
+			ctx.strokeStyle = 'yellow';
+			ctx.strokeRect(rets[i].x, rets[i].y, rets[i].width, rets[i].height);
+			ctx.restore();
+		}
+
+		return rets;
+	}
+
+	conflict(sprite){
+
 	}
 }

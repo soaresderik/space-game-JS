@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Nave Espacial - Tiro</title>
+	<script src="animacao.js"></script>
+	<script src="teclado.js"></script>
+	<script src="fundo.js"></script>
+	<script src="nave.js"></script>
+	<script src="tiro.js"></script>
+	<script src="colisor.js"></script>
+	<script src="ovni.js"></script>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+
+	<script>
+			const canvas = document.querySelector("#canvas");
+			const ctx = canvas.getContext('2d');
+			const teclado = new Teclado();
+			const animation = new Animacao(ctx);
+
+			const imgFundo = new Image();
+			imgFundo.src ='img/fundo-espaco.png';
+			imgFundo.onload = isLoaded;
+
+			const imgStart = new Image();
+			imgStart.src ='img/fundo-estrelas.png';
+			imgStart.onload = isLoaded;
+
+			const imgCloud = new Image();
+			imgCloud.src ='img/fundo-nuvens.png';
+			imgCloud.onload = isLoaded;
+
+			const imgNave = new Image();
+			imgNave.src = 'img/nave.png';
+			imgNave.onload = isLoaded;
+
+			const imgOvni = new Image();
+			imgOvni.src = 'img/ovni.png';
+			imgOvni.onload = isLoaded;
+
+			const fundo1 = new Fundo(ctx, imgFundo);
+			fundo1.vel = 2;
+			animation.newSprite(fundo1);
+
+			const fundo2 = new Fundo(ctx, imgStart);
+			fundo2.vel = 6;
+			animation.newSprite(fundo2);
+
+			const fundo3 = new Fundo(ctx, imgCloud);
+			fundo3.vel = 9;
+			animation.newSprite(fundo3);
+
+			const nave = new Nave(ctx, teclado, imgNave);
+			animation.newSprite(nave);
+
+			const colisor = new Colisor();
+			colisor.newSprite(nave);
+
+			teclado.shoted(teclado.ESPACO, function(){
+				nave.shot();
+			})
+
+			let loaded = 0;
+			function isLoaded() {
+				loaded++; 
+				if(loaded == 3) start();
+			}
+
+			function newOvni(){
+				const ovni = new Ovni(ctx, imgOvni);
+
+				ovni.vel = Math.floor(5 + Math.random() * (20 - 5 + 1));
+				ovni.x = Math.floor(Math.random() * (canvas.width - imgOvni.width + 1));
+
+				ovni.y = -imgOvni.height;
+
+				animation.newSprite(ovni);
+				colisor.newSprite(ovni);
+			}
+
+			const start = () => {
+				nave.x = canvas.width / 2 - imgNave.width / 2;
+				nave.y = canvas.height - imgNave.height;
+				nave.vel = 5;
+				animation.start();
+
+				setInterval(newOvni, 1000);
+			}
+
+
+	</script>
+</body>
+</html>

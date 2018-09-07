@@ -21,4 +21,12 @@ class Tiro {
 		this.ctx.fillRect(this.x, this.y, this.width, this.height);
 		this.ctx.restore();
 	}
+
+	squadCollision(){
+		return [ { x: this.x, y: this.y, width: this.width, height: this.height } ];
+	}
+
+	conflict(sprite){
+
+	}
 }

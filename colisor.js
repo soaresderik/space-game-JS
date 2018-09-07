@@ -6,10 +6,10 @@ class Colisor{
 
 	newSprite(sprite){
 		this.sprites.push(sprite);
+		sprite.colisor = this;
 	}
 
 	process(){
-
 		let wasTested = new Object();
 
 		for(let i in this.sprites){
